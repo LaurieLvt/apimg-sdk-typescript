@@ -92,7 +92,7 @@ try {
 
 ---
 
-#### Example: Obtain an Access Token (`getAccessToken`)
+### Example: Obtain an Access Token (`getAccessToken`)
 
 ```typescript
 try {
