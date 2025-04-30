@@ -63,5 +63,5 @@ export interface UpdateMatchingSettingsResponse {
      * @memberof UpdateMatchingSettingsResponse
      * @example {"1-1":["1-2","1-3"],"1-2":{"network 1":["1-1"],"network 2":["1-2","1-3"]}}
      */
-    user_profile_type_links?: { [key: string]: Array<string> | Map; };
+    user_profile_type_links?: { [key: string]: Array<string> | Map<string, any>; };
 }
