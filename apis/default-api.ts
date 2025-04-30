@@ -61,8 +61,6 @@ import { RequestClientError1 } from '../models';
 import { RequestClientError2 } from '../models';
 import { RequestClientError3 } from '../models';
 import { RequestClientError4 } from '../models';
-import { SignupRequest } from '../models';
-import { SignupResponse } from '../models';
 import { Subcategory } from '../models';
 import { Subcategory1 } from '../models';
 import { Subcategory2 } from '../models';
@@ -502,49 +500,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * This endpoint allows retrieving customer details.
-         * @summary Get customer details
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        geCustomerDetails: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/v1/customer`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            if (configuration && configuration.accessToken) {
-                const accessToken = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken()
-                    : await configuration.accessToken;
-                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-            }
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.params) {
-                query.set(key, options.params[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * This endpoint allows retrieving the Access token and the renewed Refresh token by providing a Refresh token.
          * @summary Get customer Access Token
          * @param {*} [options] Override http request option.
@@ -562,13 +517,12 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication bearerAuth required
-            // http bearer authentication required
-            if (configuration && configuration.accessToken) {
-                const accessToken = typeof configuration.accessToken === 'function'
-                    ? await configuration.accessToken()
-                    : await configuration.accessToken;
-                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            // authentication refreshTokenAuth required
+            if (configuration && configuration.refreshToken) {
+                const localVarApiKeyValue = typeof configuration.refreshToken === 'function'
+                    ? await configuration.refreshToken("X-APIMG-REFRESH-TOKEN")
+                    : await configuration.refreshToken;
+                localVarHeaderParameter["X-APIMG-REFRESH-TOKEN"] = localVarApiKeyValue;
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -724,6 +678,49 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          */
         getCustomerDashboardData: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v1/customer/user/dashboardData`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint allows retrieving customer details.
+         * @summary Get customer details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCustomerDetails: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/customer`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -1392,49 +1389,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * This endpoint allows a user to sign up and to retrieve its JWT.
-         * @summary User signup
-         * @param {SignupRequest} body Data required for customer signup
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        signup: async (body: SignupRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            if (body === null || body === undefined) {
-                throw new RequiredError('body','Required parameter body was null or undefined when calling signup.');
-            }
-            const localVarPath = `/v1/customer/signup`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.params) {
-                query.set(key, options.params[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * This endpoint allows updating customer categories level number (weight).
          * @summary Update customer categories level number (weight)
          * @param {UpdateCustomerCategoriesWeightRequest} body Data required to update customer categories level number (weight)
@@ -1972,19 +1926,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * This endpoint allows retrieving customer details.
-         * @summary Get customer details
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async geCustomerDetails(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetCustomerDetailsResponse>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).geCustomerDetails(options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
          * This endpoint allows retrieving the Access token and the renewed Refresh token by providing a Refresh token.
          * @summary Get customer Access Token
          * @param {*} [options] Override http request option.
@@ -2044,6 +1985,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          */
         async getCustomerDashboardData(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetCustomerDashboardDataResponse>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getCustomerDashboardData(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This endpoint allows retrieving customer details.
+         * @summary Get customer details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCustomerDetails(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GetCustomerDetailsResponse>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getCustomerDetails(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -2224,20 +2178,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          */
         async login(body: LoginRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<LoginResponse>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).login(body, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * This endpoint allows a user to sign up and to retrieve its JWT.
-         * @summary User signup
-         * @param {SignupRequest} body Data required for customer signup
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async signup(body: SignupRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<SignupResponse>>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).signup(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -2445,15 +2385,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return DefaultApiFp(configuration).deleteCustomerUsers(body, options).then((request) => request(axios, basePath));
         },
         /**
-         * This endpoint allows retrieving customer details.
-         * @summary Get customer details
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async geCustomerDetails(options?: AxiosRequestConfig): Promise<AxiosResponse<GetCustomerDetailsResponse>> {
-            return DefaultApiFp(configuration).geCustomerDetails(options).then((request) => request(axios, basePath));
-        },
-        /**
          * This endpoint allows retrieving the Access token and the renewed Refresh token by providing a Refresh token.
          * @summary Get customer Access Token
          * @param {*} [options] Override http request option.
@@ -2497,6 +2428,15 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         async getCustomerDashboardData(options?: AxiosRequestConfig): Promise<AxiosResponse<GetCustomerDashboardDataResponse>> {
             return DefaultApiFp(configuration).getCustomerDashboardData(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint allows retrieving customer details.
+         * @summary Get customer details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCustomerDetails(options?: AxiosRequestConfig): Promise<AxiosResponse<GetCustomerDetailsResponse>> {
+            return DefaultApiFp(configuration).getCustomerDetails(options).then((request) => request(axios, basePath));
         },
         /**
          * This endpoint allows retrieving customer filters.
@@ -2625,16 +2565,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         async login(body: LoginRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<LoginResponse>> {
             return DefaultApiFp(configuration).login(body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * This endpoint allows a user to sign up and to retrieve its JWT.
-         * @summary User signup
-         * @param {SignupRequest} body Data required for customer signup
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async signup(body: SignupRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<SignupResponse>> {
-            return DefaultApiFp(configuration).signup(body, options).then((request) => request(axios, basePath));
         },
         /**
          * This endpoint allows updating customer categories level number (weight).
@@ -2815,16 +2745,6 @@ export class DefaultApi extends BaseAPI {
         return DefaultApiFp(this.configuration).deleteCustomerUsers(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * This endpoint allows retrieving customer details.
-     * @summary Get customer details
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public async geCustomerDetails(options?: AxiosRequestConfig) : Promise<AxiosResponse<GetCustomerDetailsResponse>> {
-        return DefaultApiFp(this.configuration).geCustomerDetails(options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
      * This endpoint allows retrieving the Access token and the renewed Refresh token by providing a Refresh token.
      * @summary Get customer Access Token
      * @param {*} [options] Override http request option.
@@ -2873,6 +2793,16 @@ export class DefaultApi extends BaseAPI {
      */
     public async getCustomerDashboardData(options?: AxiosRequestConfig) : Promise<AxiosResponse<GetCustomerDashboardDataResponse>> {
         return DefaultApiFp(this.configuration).getCustomerDashboardData(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This endpoint allows retrieving customer details.
+     * @summary Get customer details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public async getCustomerDetails(options?: AxiosRequestConfig) : Promise<AxiosResponse<GetCustomerDetailsResponse>> {
+        return DefaultApiFp(this.configuration).getCustomerDetails(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This endpoint allows retrieving customer filters.
@@ -3014,17 +2944,6 @@ export class DefaultApi extends BaseAPI {
      */
     public async login(body: LoginRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<LoginResponse>> {
         return DefaultApiFp(this.configuration).login(body, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     * This endpoint allows a user to sign up and to retrieve its JWT.
-     * @summary User signup
-     * @param {SignupRequest} body Data required for customer signup
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public async signup(body: SignupRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<SignupResponse>> {
-        return DefaultApiFp(this.configuration).signup(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This endpoint allows updating customer categories level number (weight).

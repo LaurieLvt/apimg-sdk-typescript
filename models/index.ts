@@ -56,8 +56,6 @@ export * from './request-client-error1';
 export * from './request-client-error2';
 export * from './request-client-error3';
 export * from './request-client-error4';
-export * from './signup-request';
-export * from './signup-response';
 export * from './subcategory';
 export * from './subcategory1';
 export * from './subcategory2';

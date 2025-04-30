@@ -14,6 +14,7 @@
 
 export interface ConfigurationParameters {
     apiKey?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
+    refreshToken?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
     username?: string;
     password?: string;
     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
@@ -30,6 +31,14 @@ export class Configuration {
      * @memberof Configuration
      */
     apiKey?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
+
+    /**
+     * parameter for refreshToken security
+     *
+     * @param name security name
+     * @memberof Configuration
+     */
+    refreshToken?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
 
     /**
      * parameter for basic security
@@ -74,6 +83,7 @@ export class Configuration {
 
     constructor(param: ConfigurationParameters = {}) {
         this.apiKey = param.apiKey;
+        this.refreshToken = param.refreshToken;
         this.username = param.username;
         this.password = param.password;
         this.accessToken = param.accessToken;
