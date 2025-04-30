@@ -1,6 +1,11 @@
 {
   "name": "apimg-sdk-typescript",
   "version": "1.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LaurieLvt/apimg-sdk-typescript"
+  },
+  "homepage": "https://github.com/LaurieLvt/apimg-sdk-typescript#readme",
   "description": "OpenAPI client for APIMG",
   "author": "OpenAPI-Generator Contributors",
   "keywords": [
@@ -11,7 +16,7 @@
     "apimg",
     "apimg-sdk"
   ],
-  "license": "Unlicense",
+  "license": "MIT",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "scripts": {
