@@ -65,12 +65,15 @@ import { Subcategory } from '../models';
 import { Subcategory1 } from '../models';
 import { Subcategory2 } from '../models';
 import { Subcategory3 } from '../models';
+import { Subcategory4 } from '../models';
+import { Subcategory5 } from '../models';
 import { UpdateCustomerCategoriesWeightRequest } from '../models';
 import { UpdateCustomerItemsCompareWithRequest } from '../models';
 import { UpdateCustomerItemsNameRequest } from '../models';
 import { UpdateCustomerSubcategoriesCompareWithRequest } from '../models';
 import { UpdateCustomerSubcategoriesNameRequest } from '../models';
 import { UpdateCustomerSubcategoriesWeightRequest } from '../models';
+import { UpdateCustomerSubcategoryGeolocationValues } from '../models';
 import { UpdateCustomerUserProfileTypesRequest } from '../models';
 import { UpdateCustomerUserProfileTypesResponse } from '../models';
 import { UpdateMatchingSettingsRequest } from '../models';
@@ -1701,6 +1704,64 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * This endpoint allows updating customer geolocation subcategory values.
+         * @summary Update customer subcategory geolocation values
+         * @param {UpdateCustomerSubcategoryGeolocationValues} body Data required to update customer geolocation subcategory values
+         * @param {string} subcategoryId The unique identifier for the subcategory
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCustomerSubcategoryGeolocationValues: async (body: UpdateCustomerSubcategoryGeolocationValues, subcategoryId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling updateCustomerSubcategoryGeolocationValues.');
+            }
+            // verify required parameter 'subcategoryId' is not null or undefined
+            if (subcategoryId === null || subcategoryId === undefined) {
+                throw new RequiredError('subcategoryId','Required parameter subcategoryId was null or undefined when calling updateCustomerSubcategoryGeolocationValues.');
+            }
+            const localVarPath = `/v1/customerAlgorithm/subcategories/{subcategoryId}/geolocationValues`
+                .replace(`{${"subcategoryId"}}`, encodeURIComponent(String(subcategoryId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * This endpoint allows updating customer user profile types.
          * @summary Update customer user profile types
          * @param {UpdateCustomerUserProfileTypesRequest} body Data required to update customer user profile types
@@ -1834,7 +1895,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addCustomerSubcategories(body: AddCustomerSubcategoriesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Subcategory>>>> {
+        async addCustomerSubcategories(body: AddCustomerSubcategoriesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Subcategory1>>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).addCustomerSubcategories(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -2232,7 +2293,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCustomerSubcategoriesCompareWith(body: UpdateCustomerSubcategoriesCompareWithRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Subcategory2>>>> {
+        async updateCustomerSubcategoriesCompareWith(body: UpdateCustomerSubcategoriesCompareWithRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Subcategory3>>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).updateCustomerSubcategoriesCompareWith(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -2246,7 +2307,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCustomerSubcategoriesName(body: UpdateCustomerSubcategoriesNameRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Subcategory3>>>> {
+        async updateCustomerSubcategoriesName(body: UpdateCustomerSubcategoriesNameRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Subcategory4>>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).updateCustomerSubcategoriesName(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -2260,8 +2321,23 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCustomerSubcategoriesWeight(body: UpdateCustomerSubcategoriesWeightRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Subcategory1>>>> {
+        async updateCustomerSubcategoriesWeight(body: UpdateCustomerSubcategoriesWeightRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Subcategory2>>>> {
             const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).updateCustomerSubcategoriesWeight(body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This endpoint allows updating customer geolocation subcategory values.
+         * @summary Update customer subcategory geolocation values
+         * @param {UpdateCustomerSubcategoryGeolocationValues} body Data required to update customer geolocation subcategory values
+         * @param {string} subcategoryId The unique identifier for the subcategory
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateCustomerSubcategoryGeolocationValues(body: UpdateCustomerSubcategoryGeolocationValues, subcategoryId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Subcategory5>>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).updateCustomerSubcategoryGeolocationValues(body, subcategoryId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -2321,7 +2397,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addCustomerSubcategories(body: AddCustomerSubcategoriesRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Subcategory>>> {
+        async addCustomerSubcategories(body: AddCustomerSubcategoriesRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Subcategory1>>> {
             return DefaultApiFp(configuration).addCustomerSubcategories(body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2603,7 +2679,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCustomerSubcategoriesCompareWith(body: UpdateCustomerSubcategoriesCompareWithRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Subcategory2>>> {
+        async updateCustomerSubcategoriesCompareWith(body: UpdateCustomerSubcategoriesCompareWithRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Subcategory3>>> {
             return DefaultApiFp(configuration).updateCustomerSubcategoriesCompareWith(body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2613,7 +2689,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCustomerSubcategoriesName(body: UpdateCustomerSubcategoriesNameRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Subcategory3>>> {
+        async updateCustomerSubcategoriesName(body: UpdateCustomerSubcategoriesNameRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Subcategory4>>> {
             return DefaultApiFp(configuration).updateCustomerSubcategoriesName(body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2623,8 +2699,19 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateCustomerSubcategoriesWeight(body: UpdateCustomerSubcategoriesWeightRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Subcategory1>>> {
+        async updateCustomerSubcategoriesWeight(body: UpdateCustomerSubcategoriesWeightRequest, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Subcategory2>>> {
             return DefaultApiFp(configuration).updateCustomerSubcategoriesWeight(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint allows updating customer geolocation subcategory values.
+         * @summary Update customer subcategory geolocation values
+         * @param {UpdateCustomerSubcategoryGeolocationValues} body Data required to update customer geolocation subcategory values
+         * @param {string} subcategoryId The unique identifier for the subcategory
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateCustomerSubcategoryGeolocationValues(body: UpdateCustomerSubcategoryGeolocationValues, subcategoryId: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Subcategory5>>> {
+            return DefaultApiFp(configuration).updateCustomerSubcategoryGeolocationValues(body, subcategoryId, options).then((request) => request(axios, basePath));
         },
         /**
          * This endpoint allows updating customer user profile types.
@@ -2675,7 +2762,7 @@ export class DefaultApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async addCustomerSubcategories(body: AddCustomerSubcategoriesRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Subcategory>>> {
+    public async addCustomerSubcategories(body: AddCustomerSubcategoriesRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Subcategory1>>> {
         return DefaultApiFp(this.configuration).addCustomerSubcategories(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -2986,7 +3073,7 @@ export class DefaultApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async updateCustomerSubcategoriesCompareWith(body: UpdateCustomerSubcategoriesCompareWithRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Subcategory2>>> {
+    public async updateCustomerSubcategoriesCompareWith(body: UpdateCustomerSubcategoriesCompareWithRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Subcategory3>>> {
         return DefaultApiFp(this.configuration).updateCustomerSubcategoriesCompareWith(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -2997,7 +3084,7 @@ export class DefaultApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async updateCustomerSubcategoriesName(body: UpdateCustomerSubcategoriesNameRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Subcategory3>>> {
+    public async updateCustomerSubcategoriesName(body: UpdateCustomerSubcategoriesNameRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Subcategory4>>> {
         return DefaultApiFp(this.configuration).updateCustomerSubcategoriesName(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -3008,8 +3095,20 @@ export class DefaultApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public async updateCustomerSubcategoriesWeight(body: UpdateCustomerSubcategoriesWeightRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Subcategory1>>> {
+    public async updateCustomerSubcategoriesWeight(body: UpdateCustomerSubcategoriesWeightRequest, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Subcategory2>>> {
         return DefaultApiFp(this.configuration).updateCustomerSubcategoriesWeight(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This endpoint allows updating customer geolocation subcategory values.
+     * @summary Update customer subcategory geolocation values
+     * @param {UpdateCustomerSubcategoryGeolocationValues} body Data required to update customer geolocation subcategory values
+     * @param {string} subcategoryId The unique identifier for the subcategory
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public async updateCustomerSubcategoryGeolocationValues(body: UpdateCustomerSubcategoryGeolocationValues, subcategoryId: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Subcategory5>>> {
+        return DefaultApiFp(this.configuration).updateCustomerSubcategoryGeolocationValues(body, subcategoryId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This endpoint allows updating customer user profile types.

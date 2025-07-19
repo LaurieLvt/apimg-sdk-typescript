@@ -16,15 +16,15 @@
  * Subcategory content
  *
  * @export
- * @interface Subcategory2
+ * @interface Subcategory6
  */
-export interface Subcategory2 {
+export interface Subcategory6 {
 
     /**
      * The unique identifier for the subcategory
      *
      * @type {string}
-     * @memberof Subcategory2
+     * @memberof Subcategory6
      * @example 1-1-1
      */
     id?: string;
@@ -33,7 +33,7 @@ export interface Subcategory2 {
      * The name of the subcategory
      *
      * @type {string}
-     * @memberof Subcategory2
+     * @memberof Subcategory6
      * @example Région
      */
     subcategory_name?: string;
@@ -42,8 +42,8 @@ export interface Subcategory2 {
      * The level number (weight) of the subcategory
      *
      * @type {number}
-     * @memberof Subcategory2
-     * @example 5
+     * @memberof Subcategory6
+     * @example 1
      */
     level_number?: number;
 
@@ -51,7 +51,7 @@ export interface Subcategory2 {
      * The base score for the subcategory (optional)
      *
      * @type {number}
-     * @memberof Subcategory2
+     * @memberof Subcategory6
      * @example 100
      */
     base_score?: number | null;
@@ -60,7 +60,7 @@ export interface Subcategory2 {
      * The type of the subcategory
      *
      * @type {number}
-     * @memberof Subcategory2
+     * @memberof Subcategory6
      * @example 1
      */
     type?: number;
@@ -69,17 +69,17 @@ export interface Subcategory2 {
      * The ID of the paired subcategory (optional)
      *
      * @type {string}
-     * @memberof Subcategory2
+     * @memberof Subcategory6
      * @example 1-1-2
      */
     paired_subcategory?: string | null;
 
     /**
-     * Comparison with other subcategories and their respective level number (weight)s (optional)
+     * Comparison with other subcategories (optional)
      *
      * @type {{ [key: string]: number; }}
-     * @memberof Subcategory2
-     * @example {"1-1-3":2,"1-1-4":3}
+     * @memberof Subcategory6
+     * @example {"1-1-2":2,"1-1-3":3}
      */
     compare_with?: { [key: string]: number; } | null;
 }

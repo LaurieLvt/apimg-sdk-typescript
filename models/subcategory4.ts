@@ -34,7 +34,7 @@ export interface Subcategory4 {
      *
      * @type {string}
      * @memberof Subcategory4
-     * @example Région
+     * @example State
      */
     subcategory_name?: string;
 
@@ -43,7 +43,7 @@ export interface Subcategory4 {
      *
      * @type {number}
      * @memberof Subcategory4
-     * @example 1
+     * @example 5
      */
     level_number?: number;
 
@@ -75,7 +75,7 @@ export interface Subcategory4 {
     paired_subcategory?: string | null;
 
     /**
-     * Comparison with other subcategories (optional)
+     * Comparison with other subcategories and their respective level number (weight)s (optional)
      *
      * @type {{ [key: string]: number; }}
      * @memberof Subcategory4

@@ -34,7 +34,7 @@ export interface Subcategory3 {
      *
      * @type {string}
      * @memberof Subcategory3
-     * @example State
+     * @example Région
      */
     subcategory_name?: string;
 

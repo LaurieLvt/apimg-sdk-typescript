@@ -14,7 +14,7 @@
 
 import { Category2 } from './category2';
 import { Item1 } from './item1';
-import { Subcategory4 } from './subcategory4';
+import { Subcategory6 } from './subcategory6';
  /**
  * Response body for customer algorithm categories, subcategories, and items
  *
@@ -34,10 +34,10 @@ export interface GetCustomerAlgorithmCategoriesSubcategoriesItemsResponse {
     /**
      * List of subcategories
      *
-     * @type {Array<Subcategory4>}
+     * @type {Array<Subcategory6>}
      * @memberof GetCustomerAlgorithmCategoriesSubcategoriesItemsResponse
      */
-    subcategories?: Array<Subcategory4>;
+    subcategories?: Array<Subcategory6>;
 
     /**
      * List of items

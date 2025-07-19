@@ -46,4 +46,32 @@ export interface SubcategoryRequestItem {
      * @example 1
      */
     level_number?: number;
+
+    /**
+     * The type of subcategory, can be \"geolocation\" if the subcategory is used for geolocation, or \"other\" if not
+     *
+     * @type {string}
+     * @memberof SubcategoryRequestItem
+     * @example other
+     */
+    type?: SubcategoryRequestItemTypeEnum;
+
+    /**
+     * The maximum distance in meter allowed, 0 means no distance limit
+     *
+     * @type {number}
+     * @memberof SubcategoryRequestItem
+     * @example 1000000
+     */
+    max_distance_allowed_meters?: number;
 }
+
+/**
+ * @export
+ * @enum {string}
+ */
+export enum SubcategoryRequestItemTypeEnum {
+    Geolocation = 'geolocation',
+    Other = 'other'
+}
+

@@ -16,16 +16,16 @@
  * Subcategory content
  *
  * @export
- * @interface Subcategory1
+ * @interface Subcategory5
  */
-export interface Subcategory1 {
+export interface Subcategory5 {
 
     /**
-     * The subcategory ID
+     * The unique identifier for the subcategory
      *
      * @type {string}
-     * @memberof Subcategory1
-     * @example 1-12-1
+     * @memberof Subcategory5
+     * @example 1-1-1
      */
     id?: string;
 
@@ -33,8 +33,8 @@ export interface Subcategory1 {
      * The name of the subcategory
      *
      * @type {string}
-     * @memberof Subcategory1
-     * @example Subcategory 1
+     * @memberof Subcategory5
+     * @example Geolocation
      */
     subcategory_name?: string;
 
@@ -42,17 +42,16 @@ export interface Subcategory1 {
      * The level number (weight) of the subcategory
      *
      * @type {number}
-     * @memberof Subcategory1
-     * @example 1
+     * @memberof Subcategory5
+     * @example 0
      */
     level_number?: number;
 
     /**
-     * The base score, used for geolocation
+     * The base score for the subcategory, (optional)
      *
      * @type {number}
-     * @memberof Subcategory1
-     * @example 50
+     * @memberof Subcategory5
      */
     base_score?: number | null;
 
@@ -60,35 +59,33 @@ export interface Subcategory1 {
      * The type of subcategory (1 for \"other\", 2 for \"geolocation\")
      *
      * @type {number}
-     * @memberof Subcategory1
-     * @example 1
+     * @memberof Subcategory5
+     * @example 2
      */
-    type?: Subcategory1TypeEnum;
+    type?: Subcategory5TypeEnum;
 
     /**
      * The maximum distance in meter allowed, 0 means no distance limit
      *
      * @type {number}
-     * @memberof Subcategory1
+     * @memberof Subcategory5
      * @example 1000000
      */
     max_distance_allowed?: number | null;
 
     /**
-     * The ID of the paired subcategory (to which subcategory we must compare this subcategory)
+     * The ID of the paired subcategory (optional)
      *
      * @type {string}
-     * @memberof Subcategory1
-     * @example 1-12-2
+     * @memberof Subcategory5
      */
     paired_subcategory?: string | null;
 
     /**
-     * Comparison with other subcategories
+     * Comparison with other subcategories and their respective level number (weight)s (optional)
      *
      * @type {{ [key: string]: number; }}
-     * @memberof Subcategory1
-     * @example {"1-12-3":2,"1-12-4":3}
+     * @memberof Subcategory5
      */
     compare_with?: { [key: string]: number; } | null;
 }
@@ -97,7 +94,7 @@ export interface Subcategory1 {
  * @export
  * @enum {string}
  */
-export enum Subcategory1TypeEnum {
+export enum Subcategory5TypeEnum {
     NUMBER_1 = 1,
     NUMBER_2 = 2
 }
